@@ -20,21 +20,31 @@ spec:
         ports:
         - containerPort: 8081
         env:
-        - name: ME_CONFIG_MONGODB_ADMINUSERNAME
-          valueFrom:
-            secretKeyRef:
-              name: mongodb-secret
-              key: mongo-root-username
-        - name: ME_CONFIG_MONGODB_ADMINPASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mongodb-secret
-              key: mongo-root-password
         - name: ME_CONFIG_MONGODB_SERVER
           valueFrom:
             configMapKeyRef:
               name: mongodb-configmap
-              key: database_url
+              key: service_name
+        - name: ME_CONFIG_MONGODB_ADMINUSERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mongosecret
+              key: username
+        - name: ME_CONFIG_MONGODB_ADMINPASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongosecret
+              key: password
+        - name: ME_CONFIG_BASICAUTH_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mongoexpress-secret
+              key: username
+        - name: ME_CONFIG_BASICAUTH_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongoexpress-secret
+              key: password
 ---
 apiVersion: v1
 kind: Service
@@ -48,4 +58,4 @@ spec:
   - protocol: TCP
     port: 8081
     targetPort: 8081
-    nodePort: 30000
+    nodePort: 30001

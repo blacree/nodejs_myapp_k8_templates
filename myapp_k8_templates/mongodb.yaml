@@ -1,7 +1,7 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: mongodb-deployment
+  name: mongodb-statefulset
   labels:
     app: mongodb
 spec:
@@ -9,13 +9,14 @@ spec:
   selector:
     matchLabels:
       app: mongodb
+  serviceName: mongodb-service
   template:
     metadata:
       labels:
         app: mongodb
     spec:
       containers:
-      - name: mongodb
+      - name: mongo
         image: mongo
         ports:
         - containerPort: 27017
@@ -23,13 +24,13 @@ spec:
         - name: MONGO_INITDB_ROOT_USERNAME
           valueFrom:
             secretKeyRef:
-              name: mongodb-secret
-              key: mongo-root-username
+              name: mongosecret
+              key: username
         - name: MONGO_INITDB_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: mongodb-secret
-              key: mongo-root-password
+              name: mongosecret
+              key: password
 ---
 apiVersion: v1
 kind: Service
