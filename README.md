@@ -7,4 +7,4 @@ Nodejs my-app files and kubernetes templates (project)
 * Contains docker-compose file for testing the built Docker image by deploying it on a docker network
 
 #### myapp_k8_templates
-* Contains kubernetes templates used to deploy the application locally (using minikube - testing) and in AWS EKS
+* Contains kubernetes templates used to deploy the application locally (using minikube - testing) and remotely using AWS EKS, AZURE AKS and Google GKE
