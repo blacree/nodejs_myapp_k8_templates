@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: my-app
-        image: 441207554565.dkr.ecr.us-east-1.amazonaws.com/my-app:kubernetes
+        image: [account_id].dkr.ecr.us-east-1.amazonaws.com/my-app:kubernetes
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
